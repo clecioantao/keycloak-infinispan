@@ -1,0 +1,6 @@
+2023-04-28 11:04:17,701 ERROR [org.keycloak.quarkus.runtime.cli.ExecutionExceptionHandler] (main) ERROR: Failed to start server in (development) mode
+2023-04-28 11:04:17,701 ERROR [org.keycloak.quarkus.runtime.cli.ExecutionExceptionHandler] (main) ERROR: Failed to obtain JDBC connection
+2023-04-28 11:04:17,701 ERROR [org.keycloak.quarkus.runtime.cli.ExecutionExceptionHandler] (main) ERROR: FATAL: database "bitnami_keycloak" does not exist
+2023-04-28 11:04:17,702 ERROR [org.keycloak.quarkus.runtime.cli.ExecutionExceptionHandler] (main) For more details run the same command passing the '--verbose' option. Also you can use '--help' to see the details about the usage of the particular command.
+keycloak 11:04:34.36 
+ke

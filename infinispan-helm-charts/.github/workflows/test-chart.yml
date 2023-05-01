@@ -1,0 +1,37 @@
+name: Testsuite
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  kind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: azure/setup-helm@v3.4
+        id: install
+
+      - name: Lint
+        run: helm lint
+
+      - name: Create k8s Kind Cluster
+        uses: helm/kind-action@v1.3.0
+        with:
+          node_image: kindest/node:v1.21.14
+
+      - name: Display cluster settings
+        run: |
+          kubectl cluster-info
+          kubectl get pods -n kube-system
+          echo "current-context:" $(kubectl config current-context)
+          echo "environment-kubeconfig:" ${KUBECONFIG}
+
+      - name: Testing
+        run: |
+            kubectl create namespace helm-test
+            helm install example-infinispan . -n helm-test --set deploy.replicas=2
+            kubectl wait --for=condition=Ready pods -lapp=infinispan-pod -n helm-test --timeout=300s
